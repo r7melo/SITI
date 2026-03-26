@@ -1,0 +1,44 @@
+services:
+  # BANCO DE DADOS (MySQL)
+  db:
+    image: mysql:8.0
+    container_name: siti-mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=siti_db
+      - MYSQL_USER=user_siti
+      - MYSQL_PASSWORD=password_siti
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # BACKEND (Spring Boot)
+  api:
+    build: ./apps/api
+    container_name: siti-api
+    restart: on-failure
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/siti_db?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=user_siti
+      - SPRING_DATASOURCE_PASSWORD=password_siti
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  # FRONTEND (React + Vite)
+  web:
+    build: ./apps/web
+    container_name: siti-web
+    restart: always
+    ports:
+      - "5173:5173"
+    stdin_open: true
+    tty: true
+
+volumes:
+  mysql_data:
