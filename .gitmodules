@@ -1,0 +1,6 @@
+[submodule "apps/api"]
+	path = apps/api
+	url = https://github.com/r7melo/SITI-API.git
+[submodule "apps/web"]
+	path = apps/web
+	url = https://github.com/r7melo/SITI-WEB.git
