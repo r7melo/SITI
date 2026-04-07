@@ -60,12 +60,19 @@ Toda a documentação do sistema deve ser mantida na pasta:
 /docs
 ```
 
+Toda a explicação do modelo de projeto por submódulos:
+
+```bash
+SUBMODULOS.md
+```
+
 ---
 
 ## Observações
 
-- Sempre mantenha os submódulos atualizados
+- Sempre mantenha os submódulos atualizados, conforme citado no documento de submodulos
 - Evite alterações diretas fora do escopo de cada módulo
 - Utilize boas práticas de versionamento
 
 ---
+
